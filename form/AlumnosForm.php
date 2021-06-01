@@ -2,9 +2,9 @@
 
 namespace app\form;
 use Yii;
-use yii\base\model;
+use yii\base\Model;
 
-class AlumnosForm extends model {
+class AlumnosForm extends Model {
 
     public $id_alumno;
     public $nombre;

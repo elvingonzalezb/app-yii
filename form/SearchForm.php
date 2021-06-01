@@ -2,9 +2,9 @@
 
 namespace app\form;
 use Yii;
-use yii\base\model;
+use yii\base\Model;
 
-class SearchForm extends model {
+class SearchForm extends Model {
 
     public $q;             
     

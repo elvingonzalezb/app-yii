@@ -1,0 +1,23 @@
+{
+  "name": "basic",
+  "version": "1.1.0",
+  "description": "App de prueba mediante plantilla basic, para empresa Raptor",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elvingonzalezb/app-yii.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elvingonzalezb/app-yii/issues"
+  },
+  "homepage": "https://github.com/elvingonzalezb/app-yii#readme"
+}

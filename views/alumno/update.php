@@ -2,21 +2,23 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
+
 ?>
+<?php if (!empty($desMensaje)) : ?>
+    <div class="form-group">
+        <div class="alert alert-success">
+            <h5><?= $desMensaje ?></h5>
+        </div>
+    </div>
+<?php endif; ?>
 
 <div class="container">
     <div class="row">
         <div class="col-lg-5">
-            <div class="card">
-                <div class="card-body">                   
-                    <a href="<?= Url::toRoute("alumno/view") ?>" class="btn btn-primary float-right">Atras</a>
-                </div>
-            </div>
+            <h1>Editar alumno con id: <?= Html::encode($_GET["id_alumno"]) ?></h1>
         </div>   
     </div>
 </div>
-
-<h1>Editar alumno con id <?= Html::encode($_GET["id_alumno"]) ?></h1>
 
 <h3><?= $desMensaje ?></h3>
 
@@ -39,18 +41,23 @@ use yii\helpers\Url;
         </div>
 
         <div class="form-group">
-            <?= $form->field($alumnosForm, "clase")->input("text") ?>   
+            <?= $form->field($alumnosForm, "clase")
+                    ->input("text")
+                    ?>   
         </div>
 
         <div class="form-group">
-            <?= $form->field($alumnosForm, "nota_final")->input("text") ?>   
+            <?= $form->field($alumnosForm, "num_documento")
+                    ->input("text") 
+                    ?>   
         </div>
 
         <?= Html::submitButton("Actualizar", [
-                "class" => "btn btn-primary"
+                "class" => "btn btn-primary btn-block"
             ]) 
             ?>
 
         <?php $form->end() ?>
+        
     </div>
 </div>

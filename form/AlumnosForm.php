@@ -10,7 +10,7 @@ class AlumnosForm extends Model {
     public $nombre;
     public $apellidos;
     public $clase;
-    public $nota_final;
+    public $num_documento;
 
     public function rules() {
         return [
@@ -64,15 +64,22 @@ class AlumnosForm extends Model {
                 'message' => 'Sólo números enteros'
             ],
             [
-                'nota_final', 
+                'num_documento', 
                 'required', 
                 'message' => 'Campo requerido'
             ],
             [
-                'nota_final', 
+                'num_documento', 
                 'number', 
                 'message' => 'Sólo números'
             ],
         ];
-    } 
+    }
+    
+    public function attributeLabels() {
+        return [
+            'clase'         => "Número de clase:",
+            'num_documento' => "Número de documento:",
+        ];
+    }
 }

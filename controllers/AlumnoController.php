@@ -81,64 +81,60 @@ class AlumnoController extends Controller
         $alumnosForm = new AlumnosForm;
         $desMensaje  = null;
 
-        if($alumnosForm->load(Yii::$app->request->post())) {
+        if ($alumnosForm->load(Yii::$app->request->post())) {
 
-            if(!$alumnosForm->validate()) { 
-                return $alumnosForm->getErrors();
-            }
+            if ($alumnosForm->validate()) { 
 
-            $alumno = new Alumnos;
-            $alumno->nombre     = $alumnosForm->nombre;
-            $alumno->apellidos  = $alumnosForm->apellidos;
-            $alumno->clase      = $alumnosForm->clase;
-            $alumno->nota_final = $alumnosForm->nota_final;
+                $alumno = new Alumnos;
+                $alumno->nombre        = $alumnosForm->nombre;
+                $alumno->apellidos     = $alumnosForm->apellidos;
+                $alumno->clase         = $alumnosForm->clase;
+                $alumno->num_documento = $alumnosForm->num_documento;
 
-            if ($alumno->insert()) {
-                $desMensaje = "Registro guardado correctamente";
-                $alumnosForm->nombre     = null;
-                $alumnosForm->apellidos  = null;
-                $alumnosForm->clase      = null;
-                $alumnosForm->nota_final = null;
-            } else {
-                $desMensaje = "Ha ocurrido un error al insertar el registro";
-            }
+                if ($alumno->insert()) {
+                    $desMensaje = "Registro guardado correctamente";
+                    $alumnosForm->nombre        = null;
+                    $alumnosForm->apellidos     = null;
+                    $alumnosForm->clase         = null;
+                    $alumnosForm->num_documento = null;
+                } else {
+                    $desMensaje = "Ha ocurrido un error al insertar el registro";
+                }
+            }            
         }
         return $this->render(
-            "create", 
-            [
+            "create", [
                 'alumnosForm' => $alumnosForm, 
-                'desMensaje'  => $desMensaje]);
+                'desMensaje'  => $desMensaje
+            ]);
     }
 
     public function actionUpdate()
     {
         $alumnosForm = new AlumnosForm;
-        $desMensaje  = null;
-        
+        $desMensaje  = null;        
     
-        if($alumnosForm->load(Yii::$app->request->post())) {
+        if ($alumnosForm->load(Yii::$app->request->post())) {
 
-            if($alumnosForm->validate()) {
+            if ($alumnosForm->validate()) {
 
                 $alumno = Alumnos::findOne($alumnosForm->id_alumno);
 
-                if($alumno) {
-                    $alumno->nombre     = $alumnosForm->nombre;
-                    $alumno->apellidos  = $alumnosForm->apellidos;
-                    $alumno->clase      = $alumnosForm->clase;
-                    $alumno->nota_final = $alumnosForm->nota_final;
+                if ($alumno) {
+                    $alumno->nombre        = $alumnosForm->nombre;
+                    $alumno->apellidos     = $alumnosForm->apellidos;
+                    $alumno->clase         = $alumnosForm->clase;
+                    $alumno->num_documento = $alumnosForm->num_documento;
 
                     if ($alumno->update()) {
-                        $msg = "El Alumno ha sido actualizado correctamente";
-                        return $this->redirect(["alumno/view"]);
+                        $desMensaje = "Alumno actualizado correctamente";
+                        
                     } else {
-                        $msg = "El Alumno no ha podido ser actualizado";
+                        $desMensaje = "Alumno no se actualizo";
                     }
                 } else {
-                    $msg = "El alumno seleccionado no ha sido encontrado";
+                    $desMensaje = "Alumno seleccionado no ha sido encontrado";
                 }
-            } else {
-                $alumnosForm->getErrors();
             }
         }
 
@@ -147,23 +143,20 @@ class AlumnoController extends Controller
             return $this->redirect(["alumno/view"]);
         }
 
-        $idAlumno = Html::encode($_GET["id_alumno"]);
-        
-        if (!(int) $idAlumno) {
-            return $this->redirect(["alumno/view"]);
-        }
-
+        $idAlumno   = Html::encode($_GET["id_alumno"]);
         $alumnoEdit = Alumnos::findOne($idAlumno);
-
-        if (!$alumnoEdit) {
+        
+        if ((!(int) $idAlumno) 
+            || (!$alumnoEdit)
+        ) {
             return $this->redirect(["alumno/view"]);
         }
 
-        $alumnosForm->id_alumno  = $alumnoEdit->id_alumno;
-        $alumnosForm->nombre     = $alumnoEdit->nombre;
-        $alumnosForm->apellidos  = $alumnoEdit->apellidos;
-        $alumnosForm->clase      = $alumnoEdit->clase;
-        $alumnosForm->nota_final = $alumnoEdit->nota_final;      
+        $alumnosForm->id_alumno     = $alumnoEdit->id_alumno;
+        $alumnosForm->nombre        = $alumnoEdit->nombre;
+        $alumnosForm->apellidos     = $alumnoEdit->apellidos;
+        $alumnosForm->clase         = $alumnoEdit->clase;
+        $alumnosForm->num_documento = $alumnoEdit->num_documento;      
 
         return $this->render("update", [
             "alumnosForm" => $alumnosForm, 
@@ -180,18 +173,16 @@ class AlumnoController extends Controller
 
         $id_alumno = Html::encode($_POST["id_alumno"]);
 
-        if(!(int) $id_alumno) {
-            echo "Ha ocurrido un error al eliminar el alumno, redireccionando ...";
-            echo "<meta http-equiv='refresh' content='3; ".Url::toRoute("alumno/view")."'>";
-        }
+        if((int) $id_alumno) {
 
-        if(Alumnos::deleteAll("id_alumno = :id_alumno", [":id_alumno" => $id_alumno])) {
-            echo "Alumno con id $id_alumno eliminado con éxito, redireccionando ...";
-            echo "<meta http-equiv='refresh' content='3; ".Url::toRoute("alumno/view")."'>";
-        } else {
-            echo "Ha ocurrido un error al eliminar el alumno, redireccionando ...";
-            echo "<meta http-equiv='refresh' content='3; ".Url::toRoute("alumno/view")."'>"; 
-        }       
+            if(Alumnos::deleteAll("id_alumno = :id_alumno", [":id_alumno" => $id_alumno])) {
+                $desMensaje = "Alumno con id: $id_alumno eliminado correctamente";
+                return $this->redirect(["alumno/view"]);        
+            } else {
+                echo "Ha ocurrido un error al eliminar el alumno, redireccionando ...";
+                echo "<meta http-equiv='refresh' content='3; ".Url::toRoute("alumno/view")."'>"; 
+            }
+        }            
     }
 }
 

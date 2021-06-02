@@ -1,6 +1,6 @@
 {
   "name": "basic",
-  "version": "1.1.0",
+  "version": "0.1.0",
   "description": "App de prueba mediante plantilla basic, para empresa Raptor",
   "main": "index.js",
   "directories": {

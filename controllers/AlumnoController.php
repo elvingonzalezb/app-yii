@@ -109,8 +109,7 @@ class AlumnoController extends Controller
             ]);
     }
 
-    public function actionUpdate()
-    {
+    public function actionUpdate() {
         $alumnosForm = new AlumnosForm;
         $desMensaje  = null;        
     
@@ -162,11 +161,9 @@ class AlumnoController extends Controller
             "alumnosForm" => $alumnosForm, 
             "desMensaje"  => $desMensaje
         ]);
-    }
-    
+    }    
 
-    public function actionDelete()
-    {
+    public function actionDelete() {
         if(!Yii::$app->request->post()) {
             return $this->redirect(["alumno/view"]);
         }

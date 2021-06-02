@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$dbMongo = require __DIR__ . '/db_mongo.php';
 
 $config = [
     'id' => 'basic-console',
@@ -17,6 +18,9 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'log' => [
             'targets' => [
                 [
@@ -26,6 +30,7 @@ $config = [
             ],
         ],
         'db' => $db,
+        'dbMongo' => $dbMongo,
     ],
     'params' => $params,
     /*

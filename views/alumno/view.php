@@ -88,9 +88,9 @@ use yii\widgets\LinkPager;
                             <button type="submit" class="btn btn-warning"><i class="fas fa-user"></i> Eliminar</button>
                         <?= Html::endForm() ?>
                         </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+                    </div>
+                </div>
+            </div>
         </td>
     </tr>
     <?php endforeach ?>

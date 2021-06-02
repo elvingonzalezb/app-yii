@@ -61,13 +61,12 @@ class UserForm extends Model {
                 'password_repeat', 
                 'compare', 
                 'compareAttribute' => 'password', 
-                'message' => 'Los passwords no coinciden'
+                'message'          => 'Los passwords no coinciden'
             ],
         ];
     }
 
-    public function existEmail($attribute, $params)
-    {
+    public function existEmail($attribute, $params) {
         $email = Users::find()->where("email = :email", [
                 ":email" => $this->email
             ]);
@@ -77,8 +76,7 @@ class UserForm extends Model {
         }
     }
 
-    public function existsUsername($attribute, $params)
-    {
+    public function existsUsername($attribute, $params) {
         $username = Users::find()->where("username = :username", [
                 ":username" => $this->username
             ]);

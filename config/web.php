@@ -1,7 +1,8 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db     = require __DIR__ . '/db.php';
+$params  = require __DIR__ . '/params.php';
+$db      = require __DIR__ . '/db.php';
+$dbMongo = require __DIR__ . '/db_mongo.php';
 
 $config = [
     'id' => 'basic',
@@ -43,12 +44,15 @@ $config = [
             ],
         ],
         'db' => $db,
-       
+        'dbMongo' => $dbMongo,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         
     ],

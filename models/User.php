@@ -17,8 +17,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      * @inheritdoc
      */
     
-    /* busca la identidad del usuario a través de su $id */
-
     public static function findIdentity($id)
     {
         
@@ -34,7 +32,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      * @inheritdoc
      */
     
-    /* Busca la identidad del usuario a través de su token de acceso */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         
@@ -109,17 +106,16 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     }
 
     /**
-     * Validates password
+     * validatePassword
      *
      * @param  string  $password password to validate
      * @return boolean if password provided is valid for current user
      */
     public function validatePassword($password)
     {
-        /* Valida el password */
-        if (crypt($password, $this->password) == $this->password)
-        {
-        return $password === $password;
+    
+        if (crypt($password, $this->password) == $this->password) {
+            return $password === $password;
         }
     }
 }

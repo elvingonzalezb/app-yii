@@ -131,12 +131,9 @@ class AlumnoController extends Controller
                     } else {
                         $desMensaje = "Alumno no se actualizo";
                     }
-                } else {
-                    $desMensaje = "Alumno seleccionado no ha sido encontrado";
                 }
             }
         }
-
         
         if (!Yii::$app->request->get("id_alumno")) {
             return $this->redirect(["alumno/view"]);
@@ -164,20 +161,20 @@ class AlumnoController extends Controller
     }    
 
     public function actionDelete() {
-        if(!Yii::$app->request->post()) {
+        if (!Yii::$app->request->post()) {
             return $this->redirect(["alumno/view"]);
         }
 
         $id_alumno = Html::encode($_POST["id_alumno"]);
 
-        if((int) $id_alumno) {
+        if ((int) $id_alumno) {
 
-            if(Alumnos::deleteAll("id_alumno = :id_alumno", [":id_alumno" => $id_alumno])) {
+            if (Alumnos::deleteAll("id_alumno = :id_alumno", [":id_alumno" => $id_alumno])) {
                 $desMensaje = "Alumno con id: $id_alumno eliminado correctamente";
-                return $this->redirect(["alumno/view"]);        
+                return $this->redirect(["alumno/view"]);    
             } else {
-                echo "Ha ocurrido un error al eliminar el alumno, redireccionando ...";
-                echo "<meta http-equiv='refresh' content='3; ".Url::toRoute("alumno/view")."'>"; 
+                $desMensaje = "Error al eliminar Alumno, intente de nuevo";
+                return $this->redirect(["alumno/view"]);
             }
         }            
     }

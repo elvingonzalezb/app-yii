@@ -76,10 +76,9 @@ class UserController extends Controller
             
                 $tableUsers = new Users;
                 $tableUsers->username = $model->username;
-                $tableUsers->email    = $model->email;
-            
+                $tableUsers->email    = $model->email;            
                 $tableUsers->password = crypt($model->password, Yii::$app->params["salt"]);
-                $tableUsers->authKey = $this->randKey("abcdef0123456789", 200);
+                $tableUsers->authKey  = $this->randKey("abcdef0123456789", 200);
             
                 $tableUsers->accessToken = $this->randKey("abcdef0123456789", 200);
                     
@@ -90,9 +89,9 @@ class UserController extends Controller
                     $id      = urlencode($user->id);
                     $authKey = urlencode($user->authKey);
                             
-                    $model->username = null;
-                    $model->email = null;
-                    $model->password = null;
+                    $model->username        = null;
+                    $model->email           = null;
+                    $model->password        = null;
                     $model->password_repeat = null;
                     
                     $desMensaje = "Registro satisfactorio";
